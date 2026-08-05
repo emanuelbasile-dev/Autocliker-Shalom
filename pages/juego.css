@@ -1,0 +1,111 @@
+body{
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #1b1b1b;
+    color: white;
+    text-align: center;
+    overflow-x: hidden;
+    position: relative;
+}
+
+#fondo{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background-image: url("/clase/trabajoJV/assets/lets-start-a-tel-aviv-impressed-chain-ill-start-v0-u4mevzewd8ig1.webp");
+    background-image: url("/clase/trabajoJV/assets/TelAvivDepressed.jpg");
+    background-size: cover;
+    background-position: center;
+
+    filter: blur(1px);
+    opacity: 0.9;
+
+    transition:
+        opacity 0.8s ease,
+        background-image 0s linear 0.8s;
+
+    z-index: -1;
+}
+
+h1{
+    margin-top:30px;
+}
+
+.contador{
+
+    margin:20px;
+
+}
+
+#botonClick{
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+#botonClick img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+#botonClick:hover{
+
+    transform:scale(1.05);
+
+}
+
+#botonClick:active{
+
+    transform:scale(.95);
+
+}
+
+
+.tienda{
+    
+    margin-top:40px;
+    display:inline-block;
+    background:#0614dd;
+    padding:20px;
+    border-radius:10px;
+
+}
+
+.mejora{
+
+    margin:20px;
+
+}
+
+button{
+
+    padding:10px 20px;
+    font-size:16px;
+
+}
+
+.barraXP{
+    width:400px;
+    height:25px;
+    background:#444;
+    margin:15px auto;
+    border-radius:20px;
+    overflow:hidden;
+    border:2px solid white;
+}
+
+#xp{
+    width:0%;
+    height:100%;
+    background:limegreen;
+    transition:.2s;
+}
