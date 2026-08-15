@@ -1,4 +1,13 @@
+/* =========================
+   TEMPORIZADOR DEL FONDO
+========================= */
+
 let tiempoInactivo;
+
+
+/* =========================
+   VARIABLES DEL JUEGO
+========================= */
 
 let monedas = 0;
 
@@ -16,26 +25,58 @@ let experiencia = 0;
 
 let experienciaNecesaria = 100;
 
-const monedasTexto = document.getElementById("monedas");
-const porClickTexto = document.getElementById("porClick");
-const porSegundoTexto = document.getElementById("porSegundo");
 
-const costoCursorTexto = document.getElementById("costoCursor");
-const costoAutoTexto = document.getElementById("costoAuto");
+/* =========================
+   ELEMENTOS DEL HTML
+========================= */
 
-const boton = document.getElementById("botonClick");
+const monedasTexto =
+    document.getElementById("monedas");
+
+const porClickTexto =
+    document.getElementById("porClick");
+
+const porSegundoTexto =
+    document.getElementById("porSegundo");
+
+const costoCursorTexto =
+    document.getElementById("costoCursor");
+
+const costoAutoTexto =
+    document.getElementById("costoAuto");
+
+const boton =
+    document.getElementById("botonClick");
+
+const fondo =
+    document.getElementById("fondo");
 
 
+/* =========================
+   RUTAS DE LOS FONDOS
+========================= */
 
-function comprarCursor(){
+const fondoActivo =
+    "../assets/tel_aviv_impressed.webp";
 
-    if(monedas >= costoCursor){
+const fondoInactivo =
+    "../assets/TelAvivDepressed.jpg";
+
+
+/* =========================
+   COMPRAR CURSOR
+========================= */
+
+function comprarCursor() {
+
+    if (monedas >= costoCursor) {
 
         monedas -= costoCursor;
 
         monedasPorClick++;
 
-        costoCursor = Math.floor(costoCursor*1.5);
+        costoCursor =
+            Math.floor(costoCursor * 1.5);
 
         actualizar();
 
@@ -43,15 +84,21 @@ function comprarCursor(){
 
 }
 
-function comprarAuto(){
 
-    if(monedas >= costoAuto){
+/* =========================
+   COMPRAR AUTOCLICKER
+========================= */
+
+function comprarAuto() {
+
+    if (monedas >= costoAuto) {
 
         monedas -= costoAuto;
 
         monedasPorSegundo++;
 
-        costoAuto = Math.floor(costoAuto*1.8);
+        costoAuto =
+            Math.floor(costoAuto * 1.8);
 
         actualizar();
 
@@ -60,15 +107,24 @@ function comprarAuto(){
 }
 
 
-setInterval(()=>{
+/* =========================
+   MONEDAS AUTOMÁTICAS
+========================= */
+
+setInterval(() => {
 
     monedas += monedasPorSegundo;
 
     actualizar();
 
-},1000);
+}, 1000);
 
-boton.addEventListener("click",()=>{
+
+/* =========================
+   CLICK PRINCIPAL
+========================= */
+
+boton.addEventListener("click", () => {
 
     monedas += monedasPorClick;
 
@@ -79,12 +135,17 @@ boton.addEventListener("click",()=>{
     actualizar();
 
     reiniciarTemporizador();
+
 });
 
 
-function revisarNivel(){
+/* =========================
+   SUBIR DE NIVEL
+========================= */
 
-    if(experiencia >= experienciaNecesaria){
+function revisarNivel() {
+
+    if (experiencia >= experienciaNecesaria) {
 
         experiencia = 0;
 
@@ -92,61 +153,116 @@ function revisarNivel(){
 
         monedas += 200;
 
-        experienciaNecesaria = Math.floor(experienciaNecesaria * 1.4);
+        experienciaNecesaria =
+            Math.floor(experienciaNecesaria * 1.4);
 
     }
 
 }
 
 
+/* =========================
+   ACTUALIZAR INTERFAZ
+========================= */
 
-function actualizar(){
+function actualizar() {
 
-    monedasTexto.textContent = Math.floor(monedas);
+    monedasTexto.textContent =
+        Math.floor(monedas);
 
-    porClickTexto.textContent = monedasPorClick;
+    porClickTexto.textContent =
+        monedasPorClick;
 
-    porSegundoTexto.textContent = monedasPorSegundo;
+    porSegundoTexto.textContent =
+        monedasPorSegundo;
 
-    costoCursorTexto.textContent = costoCursor;
+    costoCursorTexto.textContent =
+        costoCursor;
 
-    costoAutoTexto.textContent = costoAuto;
+    costoAutoTexto.textContent =
+        costoAuto;
 
-    document.getElementById("nivel").textContent = nivel;
+    document.getElementById("nivel").textContent =
+        nivel;
 
-    document.getElementById("xpActual").textContent = experiencia;
+    document.getElementById("xpActual").textContent =
+        experiencia;
 
-    document.getElementById("xpNecesaria").textContent = experienciaNecesaria;
+    document.getElementById("xpNecesaria").textContent =
+        experienciaNecesaria;
+
+
+    /* BARRA DE EXPERIENCIA */
+
+    const porcentajeXP =
+        (experiencia / experienciaNecesaria) * 100;
 
     document.getElementById("xp").style.width =
-        (experiencia / experienciaNecesaria) * 100 + "%";
+        porcentajeXP + "%";
+
 }
 
-const fondo = document.getElementById("fondo");
 
-function reiniciarTemporizador(){
+/* =========================
+   TEMPORIZADOR DEL FONDO
+========================= */
+
+function reiniciarTemporizador() {
+
+    /* Cancelamos el temporizador anterior */
 
     clearTimeout(tiempoInactivo);
 
+
+    /* Volvemos al fondo activo */
+
+    fondo.style.backgroundImage =
+        `url("${fondoActivo}")`;
+
     fondo.style.opacity = "0.9";
 
-    fondo.style.backgroundImage = 'url("/clase/trabajoJV/assets/lets-start-a-tel-aviv-impressed-chain-ill-start-v0-u4mevzewd8ig1.webp")';
+
+    /* Esperamos 10 segundos */
 
     tiempoInactivo = setTimeout(() => {
 
-        fondo.style.opacity = "3";
+
+        /* Desaparece suavemente */
+
+        fondo.style.opacity = "0";
+
+
+        /*
+            Esperamos lo mismo que dura
+            la transición del CSS
+        */
 
         setTimeout(() => {
 
-            fondo.style.backgroundImage = 'url("/clase/trabajoJV/assets/TelAvivDepressed.jpg")';
+
+            /* Cambiamos el fondo */
+
+            fondo.style.backgroundImage =
+                `url("${fondoInactivo}")`;
+
+
+            /* Volvemos a mostrarlo */
 
             fondo.style.opacity = "0.9";
 
-        },800);
 
-    },10000);
+        }, 800);
+
+
+    }, 10000);
 
 }
 
+
+/* =========================
+   INICIAR JUEGO
+========================= */
+
 actualizar();
+
 reiniciarTemporizador();
