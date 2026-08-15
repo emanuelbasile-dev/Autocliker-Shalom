@@ -56,9 +56,9 @@ const fondo =
    RUTAS DE LOS FONDOS
 ========================= */
 
-const fondoActivo = "./assets/tel_aviv_impressed.webp";
+const fondoActivo = "./tel_aviv_impressed.webp";
 
-const fondoInactivo = "./assets/TelAvivDepressed.jpg";
+const fondoInactivo = "./TelAvivDepressed.jpg";
 
 
 /* =========================
